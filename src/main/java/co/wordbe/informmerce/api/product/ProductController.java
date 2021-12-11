@@ -19,8 +19,7 @@ public class ProductController {
     }
 
     @GetMapping("/v1/products/{id}")
-    public ProductEntity getProducts(@PathVariable Long id) {
-        System.out.println("id = " + id);
-        return productService.findById(id);
+    public ProductEntity getProduct(@PathVariable Long id) {
+        return productService.getProduct(id);
     }
 }

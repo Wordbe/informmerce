@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public ProductEntity findById(Long id) {
+    public ProductEntity getProduct(Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
