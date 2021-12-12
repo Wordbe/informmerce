@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,19 +14,19 @@ import java.math.BigDecimal;
 @Table(name = "product")
 public class ProductEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String description;
-    private String image;
+    private String imageUrl;
     private BigDecimal price;
 
     @Builder
-    public ProductEntity(String name, String description, String image, BigDecimal price) {
+    public ProductEntity(String name, String description, String imageUrl, BigDecimal price) {
         this.name = name;
         this.description = description;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.price = price;
     }
 }
