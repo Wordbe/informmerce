@@ -1,13 +1,10 @@
-package co.wordbe.informmerce.api.product;
+package co.wordbe.informmerce.api.product.controller;
 
 import co.wordbe.informmerce.api.product.dto.ProductCreateRequestDto;
 import co.wordbe.informmerce.api.product.dto.ProductResponseDto;
 import co.wordbe.informmerce.api.product.facade.ProductFacade;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -15,7 +12,7 @@ public class ProductController {
     private final ProductFacade productFacade;
 
     @PostMapping("/v1/products")
-    public Long createProduct(ProductCreateRequestDto requestDto) {
+    public Long createProduct(@RequestBody ProductCreateRequestDto requestDto) {
         return productFacade.createProduct(requestDto);
     }
 
