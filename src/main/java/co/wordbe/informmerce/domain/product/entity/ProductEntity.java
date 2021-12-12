@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.domain.product;
+package co.wordbe.informmerce.domain.product.entity;
 
 import lombok.Builder;
 import lombok.Getter;

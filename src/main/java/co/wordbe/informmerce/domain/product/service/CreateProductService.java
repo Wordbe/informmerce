@@ -1,6 +1,6 @@
 package co.wordbe.informmerce.domain.product.service;
 
-import co.wordbe.informmerce.domain.product.ProductEntity;
+import co.wordbe.informmerce.domain.product.entity.ProductEntity;
 import co.wordbe.informmerce.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
