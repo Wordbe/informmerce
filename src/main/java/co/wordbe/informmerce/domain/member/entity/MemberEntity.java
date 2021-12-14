@@ -3,9 +3,16 @@ package co.wordbe.informmerce.domain.member.entity;
 import co.wordbe.informmerce.domain.member.enums.MemberGrade;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Getter
+@NoArgsConstructor
+@Entity
+@Table(name = "member")
 public class MemberEntity {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
