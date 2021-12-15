@@ -21,6 +21,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70' // for Argon2PasswordEncoder
     implementation 'org.mariadb.jdbc:mariadb-java-client'
 
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
