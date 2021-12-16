@@ -1,7 +1,9 @@
 package co.wordbe.informmerce.api.common.security.jwt;
 
+import co.wordbe.informmerce.domain.common.util.LocalDateTimeUtil;
 import co.wordbe.informmerce.domain.member.entity.MemberEntity;
 import co.wordbe.informmerce.domain.member.enums.MemberAuthProvider;
+import co.wordbe.informmerce.domain.member.model.MemberAttribute;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -29,7 +33,31 @@ public class JwtManager {
 
     public JwtManager(@Value("${jwt.access-token-secret-key}")
                       String accessTokenSecretKey) {
-        this.ACCESS_TOKEN_SECRET_KEY = Keys.hmacShaKeyFor(Decoders.BASE64.decode(accessTokenSecretKey));
+        this.ACCESS_TOKEN_SECRET_KEY = generateHmacShaKey(accessTokenSecretKey);
+    }
+
+    public static SecretKey generateHmacShaKey(String secretKey) {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+    }
+
+    public String createAccessToken(MemberAttribute member, LocalDateTime issuedAt) {
+        return createJwt(member, issuedAt, issuedAt.plusMinutes(ACCESS_TOKEN_VALID_MINUTES), ACCESS_TOKEN_SECRET_KEY);
+    }
+
+    public String createRefreshToken(MemberAttribute member, LocalDateTime issuedAt, SecretKey secretKey) {
+        return createJwt(member, issuedAt, issuedAt.plusDays(REFRESH_TOKEN_VALID_DAYS), secretKey);
+    }
+
+    public String createJwt(MemberAttribute member, LocalDateTime issuedAt, LocalDateTime expiresAt, SecretKey secretKey) {
+        return Jwts.builder()
+                .setAudience(member.getEmail())
+                .setIssuedAt(LocalDateTimeUtil.date(issuedAt))
+                .setExpiration(LocalDateTimeUtil.date(expiresAt))
+                .claim("id", member.getId())
+                .claim("roles", member.getRoles())
+                .claim("provider", member.getProvider().name())
+                .signWith(secretKey)
+                .compact();
     }
 
     public String resolveAccessToken(HttpServletRequest request) {
@@ -52,6 +80,7 @@ public class JwtManager {
     public Authentication getAuthentication(String accessToken) {
         Jws<Claims> claims = getClaims(accessToken);
         List<String> roles = (List<String>) claims.getBody().get("roles");
+
         List<SimpleGrantedAuthority> authorities = roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(toList());

@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.domain.common.exception;
+package co.wordbe.informmerce.domain.common.enums;
 
 import co.wordbe.informmerce.domain.common.enums.ErrorType;
 import lombok.RequiredArgsConstructor;
