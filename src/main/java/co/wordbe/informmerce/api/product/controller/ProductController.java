@@ -7,6 +7,8 @@ import co.wordbe.informmerce.api.product.facade.ProductFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 public class ProductController {
@@ -14,7 +16,7 @@ public class ProductController {
 
     @PostMapping("/v1/products")
     @CheckUserLogin
-    public Long createProduct(@RequestBody ProductCreateRequestDto requestDto) {
+    public Long createProduct(@RequestBody @Valid ProductCreateRequestDto requestDto) {
         return productFacade.createProduct(requestDto);
     }
 

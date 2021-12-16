@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 public class MemberController {
     private final MemberFacade memberFacade;
 
     @PostMapping("/v1/members/signup")
-    public MemberCreateResponseDto signup(@RequestBody MemberCreateRequestDto requestDto) {
+    public MemberCreateResponseDto signup(@RequestBody @Valid MemberCreateRequestDto requestDto) {
         return memberFacade.createMember(requestDto);
     }
 }
