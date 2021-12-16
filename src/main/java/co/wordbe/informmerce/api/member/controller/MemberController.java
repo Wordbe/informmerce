@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberFacade memberFacade;
 
-    @PostMapping("/v1/members")
-    public MemberCreateResponseDto createMember(@RequestBody MemberCreateRequestDto requestDto) {
+    @PostMapping("/v1/members/signup")
+    public MemberCreateResponseDto signup(@RequestBody MemberCreateRequestDto requestDto) {
         return memberFacade.createMember(requestDto);
     }
 }
