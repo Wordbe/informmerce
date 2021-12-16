@@ -9,7 +9,7 @@ public class CommonException extends RuntimeException {
     private final ErrorType error;
 
     @Builder
-    protected CommonException(ErrorType error) {
+    public CommonException(ErrorType error) {
         super(error.getMessage());
         this.error = error;
     }
