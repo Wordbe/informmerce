@@ -12,10 +12,12 @@ spring:
       hibernate:
         format_sql: true
 
-
 logging:
   level:
     org:
       hibernate:
         SQL: DEBUG
         type.descriptor.sql.BasicBinder: TRACE
+
+jwt:
+  access-token-secret-key: aW5mb3JtbWVyY2V0b3dlbGNvbWVJdGlzYWxvbmdlc3RhYmxpc2hlZGZhY3R0aGF0YXJlYWRlcndpbGxiZWRpc3RyYWN0ZWR0aGVyZWFkYWJsZWNvbnRlbnRwYWdld2hlbmxvb2tpbmdhdGl0c2xheW91dA==

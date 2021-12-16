@@ -1,6 +1,7 @@
 package co.wordbe.informmerce.api.common.security.form;
 
 import co.wordbe.informmerce.domain.member.entity.MemberEntity;
+import co.wordbe.informmerce.domain.member.enums.MemberAuthProvider;
 import co.wordbe.informmerce.domain.member.service.FindMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,7 @@ public class FormUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // username == email
-        MemberEntity member = findMemberService.findByEmail(username);
+        MemberEntity member = findMemberService.findByEmailAndProvider(username, MemberAuthProvider.INFORMMERCE);
         return new FormUserDetails(member);
     }
 }
