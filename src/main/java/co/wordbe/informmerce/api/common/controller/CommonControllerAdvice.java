@@ -21,10 +21,9 @@ public class CommonControllerAdvice {
     @ExceptionHandler(CommonException.class)
     public ResponseEntity<ErrorResponse> handleException(CommonException e) {
         log.error("[CommonException]", e);
-        ErrorType error = e.getError();
         return ResponseEntity
-                .status(error.getStatus())
-                .body(ErrorResponse.of(error.getMessage(), error.getCode()));
+                .status(e.getStatus())
+                .body(ErrorResponse.of(e.getMessage(), e.getCode()));
     }
 
     /**

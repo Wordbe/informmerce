@@ -1,9 +1,11 @@
 package co.wordbe.informmerce.api.common.security.jwt;
 
+import co.wordbe.informmerce.api.common.security.dto.RefreshTokenPayload;
 import co.wordbe.informmerce.domain.common.util.LocalDateTimeUtil;
 import co.wordbe.informmerce.domain.member.entity.MemberEntity;
 import co.wordbe.informmerce.domain.member.enums.MemberAuthProvider;
 import co.wordbe.informmerce.domain.member.model.MemberAttribute;
+import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -30,10 +31,13 @@ public class JwtManager {
     public static final int ACCESS_TOKEN_VALID_MINUTES = 60;
     public static final int REFRESH_TOKEN_VALID_DAYS = 14;
     private final SecretKey ACCESS_TOKEN_SECRET_KEY;
+    private final Gson gson;
 
     public JwtManager(@Value("${jwt.access-token-secret-key}")
-                      String accessTokenSecretKey) {
+                      String accessTokenSecretKey,
+                      Gson gson) {
         this.ACCESS_TOKEN_SECRET_KEY = generateHmacShaKey(accessTokenSecretKey);
+        this.gson = gson;
     }
 
     public static SecretKey generateHmacShaKey(String secretKey) {
@@ -71,10 +75,7 @@ public class JwtManager {
     }
 
     public Jws<Claims> getClaims(String jwt) {
-        return Jwts.parserBuilder()
-                .setSigningKey(ACCESS_TOKEN_SECRET_KEY)
-                .build()
-                .parseClaimsJws(jwt);
+        return getClaimsWithSecretKey(jwt, ACCESS_TOKEN_SECRET_KEY);
     }
 
     public Authentication getAuthentication(String accessToken) {
@@ -92,5 +93,19 @@ public class JwtManager {
                 .build();
 
         return new UsernamePasswordAuthenticationToken(member, null, authorities);
+    }
+
+    public Jws<Claims> getClaimsWithSecretKey(String jwt, SecretKey secretKey) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(jwt);
+    }
+
+    public RefreshTokenPayload getClaimsWithoutSecretKey(String jwt) {
+        String[] chunks = jwt.split("\\.");
+        String payload = new String(Decoders.BASE64.decode(chunks[1]));
+
+        return gson.fromJson(payload, RefreshTokenPayload.class);
     }
 }

@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.domain.member.exception;
+package co.wordbe.informmerce.domain.auth.exception;
 
 import co.wordbe.informmerce.domain.common.enums.ErrorType;
 import co.wordbe.informmerce.domain.common.exception.CommonException;
