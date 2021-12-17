@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.api.common.security.form;
+package co.wordbe.informmerce.api.common.security.login.form;
 
 import co.wordbe.informmerce.api.common.dto.ErrorResponse;
 import com.google.gson.Gson;

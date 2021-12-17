@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.api.common.security.dto;
+package co.wordbe.informmerce.api.common.security.jwt.dto;
 
 import lombok.Getter;
 import lombok.Setter;

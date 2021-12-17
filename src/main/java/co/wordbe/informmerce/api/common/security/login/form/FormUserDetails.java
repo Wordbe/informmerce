@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.api.common.security.form;
+package co.wordbe.informmerce.api.common.security.login.form;
 
 import co.wordbe.informmerce.domain.member.entity.MemberEntity;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package co.wordbe.informmerce.api.common.security.config;
 
-import co.wordbe.informmerce.api.common.security.form.FormAuthenticationProvider;
+import co.wordbe.informmerce.api.common.security.login.form.FormAuthenticationProvider;
 import co.wordbe.informmerce.api.common.security.exception.ForwardAuthenticationEntryPoint;
-import co.wordbe.informmerce.api.common.security.form.FormFailureHandler;
-import co.wordbe.informmerce.api.common.security.form.FormSuccessHandler;
+import co.wordbe.informmerce.api.common.security.login.form.FormFailureHandler;
+import co.wordbe.informmerce.api.common.security.login.form.FormSuccessHandler;
 import co.wordbe.informmerce.api.common.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

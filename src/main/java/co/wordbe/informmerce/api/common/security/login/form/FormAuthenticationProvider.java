@@ -1,4 +1,4 @@
-package co.wordbe.informmerce.api.common.security.form;
+package co.wordbe.informmerce.api.common.security.login.form;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;

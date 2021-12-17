@@ -1,6 +1,6 @@
 package co.wordbe.informmerce.api.common.security.jwt;
 
-import co.wordbe.informmerce.api.common.security.dto.RefreshTokenPayload;
+import co.wordbe.informmerce.api.common.security.jwt.dto.RefreshTokenPayload;
 import co.wordbe.informmerce.domain.common.util.LocalDateTimeUtil;
 import co.wordbe.informmerce.domain.member.entity.MemberEntity;
 import co.wordbe.informmerce.domain.member.enums.MemberAuthProvider;
