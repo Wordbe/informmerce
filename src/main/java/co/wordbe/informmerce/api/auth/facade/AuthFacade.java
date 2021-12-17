@@ -1,7 +1,7 @@
 package co.wordbe.informmerce.api.auth.facade;
 
 import co.wordbe.informmerce.api.auth.dto.AuthRefreshResponseDto;
-import co.wordbe.informmerce.api.common.security.dto.RefreshTokenPayload;
+import co.wordbe.informmerce.api.common.security.jwt.dto.RefreshTokenPayload;
 import co.wordbe.informmerce.api.common.security.jwt.JwtManager;
 import co.wordbe.informmerce.api.member.mapper.MemberMapper;
 import co.wordbe.informmerce.domain.auth.enums.AuthErrorType;
