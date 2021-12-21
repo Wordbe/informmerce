@@ -80,16 +80,17 @@ public class JwtManager {
 
     public Authentication getAuthentication(String accessToken) {
         Jws<Claims> claims = getClaims(accessToken);
-        List<String> roles = (List<String>) claims.getBody().get("roles");
+        Claims payload = claims.getBody();
+        List<String> roles = (List<String>) payload.get("roles");
 
         List<SimpleGrantedAuthority> authorities = roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(toList());
 
         MemberEntity member = MemberEntity.builder()
-                .id(claims.getBody().get("id", Long.class))
-                .email(claims.getBody().getAudience())
-                .provider(claims.getBody().get("provider", MemberAuthProvider.class))
+                .id(Long.valueOf(payload.get("id", String.class)))
+                .email(payload.getAudience())
+                .provider(MemberAuthProvider.valueOf(payload.get("provider", String.class).toUpperCase()))
                 .build();
 
         return new UsernamePasswordAuthenticationToken(member, null, authorities);
