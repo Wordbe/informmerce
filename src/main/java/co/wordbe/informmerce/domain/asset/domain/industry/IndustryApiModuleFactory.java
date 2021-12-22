@@ -18,7 +18,7 @@ public class IndustryApiModuleFactory {
                 .collect(toMap(IndustryApiModule::getIndustry, Function.identity()));
     }
 
-    public IndustryApiModule getSendModule(IndustryType industry) {
+    public IndustryApiModule getApiModule(IndustryType industry) {
         return industryApiModules.get(industry);
     }
 }
