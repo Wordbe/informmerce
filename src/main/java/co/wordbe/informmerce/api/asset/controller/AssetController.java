@@ -16,9 +16,9 @@ import javax.validation.Valid;
 public class AssetController {
     private final AssetFacade assetFacade;
 
-    @PostMapping("/v1/assets")
+    @PostMapping("/v1/assets/send")
     @CheckUserLogin
-    public AssetSendResponseDto sendAndSave(@RequestBody @Valid AssetSendRequestDto requestDto) {
-        return assetFacade.sendAndSave(requestDto);
+    public AssetSendResponseDto sendAssetRequests(@RequestBody @Valid AssetSendRequestDto requestDto) {
+        return assetFacade.sendAssetApis(requestDto);
     }
 }
