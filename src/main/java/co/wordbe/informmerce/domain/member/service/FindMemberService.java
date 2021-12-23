@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
@@ -18,5 +20,9 @@ public class FindMemberService {
     public MemberEntity findByEmailAndProvider(String email, MemberAuthProvider provider) {
         return memberRepository.findByEmailAndProvider(email, provider)
                 .orElseThrow(() -> new MemberNotFoundException(MemberErrorType.MEMBER_NOT_FOUND));
+    }
+
+    public Optional<MemberEntity> findNullableMemberByEmailAndProvider(String email, MemberAuthProvider provider) {
+        return memberRepository.findByEmailAndProvider(email, provider);
     }
 }
