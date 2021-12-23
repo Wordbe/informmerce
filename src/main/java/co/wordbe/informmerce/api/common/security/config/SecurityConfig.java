@@ -23,15 +23,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // REST API 이므로 CSRF 보안을 사용하지 않음
-                .authorizeRequests()
+            .authorizeRequests()
                 .antMatchers("/**").permitAll() // 모든 요청은 모두 허용 (인증 필요 요청은 어노테이션으로 blacklist 관리)
-            .and()
-                .formLogin()
+                .and()
+            .formLogin()
                 .loginProcessingUrl("/v1/login")
                 .successHandler(formSuccessHandler)
                 .failureHandler(formFailureHandler)
                 .and()
                 .authenticationProvider(formAuthenticationProvider)
+            .oauth2Login()
+                .and()
             .exceptionHandling()
                 .authenticationEntryPoint(forwardAuthenticationEntryPoint)
             .and()
