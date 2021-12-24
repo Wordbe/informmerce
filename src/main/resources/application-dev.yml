@@ -1,8 +1,5 @@
+# 개발
 spring:
-  profiles:
-    include:
-      - oauth
-
   datasource:
     url: jdbc:mariadb://localhost:3306/informmerce
     username: rdijin
@@ -24,13 +21,3 @@ spring:
             client-id: ZLCeYh58ja9U1qlRHedu
             client-secret: u7JMoLR5WU
             redirect-uri: http://localhost:8080/login/oauth2/code/naver
-
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type.descriptor.sql.BasicBinder: TRACE
-
-jwt:
-  access-token-secret-key: aW5mb3JtbWVyY2V0b3dlbGNvbWVJdGlzYWxvbmdlc3RhYmxpc2hlZGZhY3R0aGF0YXJlYWRlcndpbGxiZWRpc3RyYWN0ZWR0aGVyZWFkYWJsZWNvbnRlbnRwYWdld2hlbmxvb2tpbmdhdGl0c2xheW91dA==
