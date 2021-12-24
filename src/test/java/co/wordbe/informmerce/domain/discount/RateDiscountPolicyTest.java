@@ -5,6 +5,7 @@ import co.wordbe.informmerce.domain.member.enums.MemberGrade;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +22,7 @@ class RateDiscountPolicyTest {
 
         BigDecimal discount = discountPolicy.discountAmount(member, BigDecimal.valueOf(10000));
 
-        assertThat(discount).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(discount).isEqualTo(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_UP));
     }
 
     @Test
