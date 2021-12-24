@@ -36,6 +36,7 @@ dependencies {
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0' // setter, builder 매핑 둘 다 작동하기 위해
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor' // @ConfigurationProperties 사용하여 yml 파일과 자바파일 매칭
     annotationProcessor 'org.projectlombok:lombok'
 
     implementation 'com.google.code.gson:gson:2.8.9'
